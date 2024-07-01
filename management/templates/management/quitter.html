@@ -38,19 +38,18 @@
                         <th>Username</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>가입승인</th>
+                        <th>비활성화</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in data %}
-                    {% comment %} <tr data-url="{% url 'allow:allow_detail' item.id %}" style="cursor: pointer;"> {% endcomment %}
-                    <tr>    
+                    <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ item.username }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.email }}</td>
                         <td>
-                            <a href="{% url 'management:approve_user' item.id %}" class="approve-btn">승인</a>
+                            <a href="#" class="quitter">비활성화</a>
                             {% comment %} <a href="{% url 'management:reject_user' item.id %}" class="reject-btn">거부</a> {% endcomment %}
                         </td>
                         </td>

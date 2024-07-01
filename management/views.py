@@ -20,26 +20,18 @@ def manager_edit(request, id):
     print('='*100)
     user = get_object_or_404(User, id=id)
     data = {'user': user}
+    #get으로 들어올시 기존값 반환
     if request.method == 'GET':
         return render(request, 'management/management_edit.html', data)
+    #post로 들어올시 수정된값 반환
     else:
         user.username = request.POST.get('username')
         user.name = request.POST.get('name')
         user.email = request.POST.get('email')
         user.save()
         return redirect("management:management_detail", id)
-    
-# def manager_edit(request, id):
-#     user = User.objects.get(id=id)
-#     print(user.id)
-#     print(request.method)
-#     print('='*20) 
-#     if request.method == 'GET':
-#         user.username = request.GET.get('username')
-#         user.name = request.GET.get('name')
-#         user.email = request.GET.get('email')
-#         user.save()
-#         return redirect('management:management_detail', id=user.id)
-#     else:
-#         data = {'user': user}
-#         return render(request, 'management/management_edit.html', data)
+ # 가입승인페이지
+def allow(request):
+    data = User.objects.filter(is_active = False)
+    print('='*50)
+    return render(request, 'management/allow.html',{'data':data})   

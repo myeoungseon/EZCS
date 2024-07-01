@@ -37,9 +37,9 @@ def allow(request):
     data = User.objects.filter(active_status = 0)
     return render(request, 'management/allow.html',{'data':data})
 
-def allow_detail(request, id):
-    user = User.objects.get(id=id)
-    return render(request, 'management/management_detail.html', {'user':user})   
+# def allow_detail(request, id):
+#     user = User.objects.get(id=id)
+#     return render(request, 'management/management_detail.html', {'user':user})   
 
 #승인
 def approve_user(request, id):

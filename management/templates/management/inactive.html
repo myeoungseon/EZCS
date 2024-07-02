@@ -51,7 +51,7 @@
                         <th>Username</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>비활성화</th>
+                        <th>활성화</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@
                         <td>{{ item.name }}</td>
                         <td>{{ item.email }}</td>
                         <td>
-                            <a href="#">비활성화</a>
+                            <a href="{% url 'management:inactive_active' item.id %}">활성화</a>
                             {% comment %} <a href="{% url 'management:reject_user' item.id %}" class="reject-btn">거부</a> {% endcomment %}
                         </td>
                     </tr>

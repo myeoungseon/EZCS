@@ -24,9 +24,9 @@
         </div>
         <div>
             <nav class="nev-form">
-                <a class="btn btn-outline-primary" type="button" href="{% url 'management:manager_dashboard' %}">직원 관리</a>
+                <a class="btn btn-outline-primary" type="button" href="{% url 'management:dashboard' %}">직원 관리</a>
                 <a class="btn btn-outline-primary" type="button" href="{% url 'management:allow' %}">가입 승인</a>
-                {% comment %} <a class="btn btn-outline-primary" type="button" href="{% url 'management:quitter' %}">퇴사 및 휴직 관리</a> {% endcomment %}
+                <a class="btn btn-outline-primary" type="button" href="{% url 'management:inactive' %}">퇴사 및 휴직 관리</a>
             </nav>
         </div>
         <div class="main-content-wrapper">

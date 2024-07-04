@@ -11,7 +11,7 @@ def manager_dashboard(request):
 
 #상세페이지
 def manager_detail(request, id):
-    user = User.objects.get(id=id)
+    user = get_object_or_404(User, id=id)
     return render(request, 'management/management_detail.html', {'user':user})
 
 #개인정보 수정
@@ -38,29 +38,19 @@ def manager_edit(request, id):
         return redirect("management:management_detail", id)
 
 
-
 # 가입승인페이지
 def allow(request):
     data = User.objects.filter(active_status = 0)
     return render(request, 'management/allow.html',{'data':data})
 
-# 가입요청유저상세페이지
-def allow_detail(request, id):
-    user = get_object_or_404(User, id=id)
-    return render(request, 'management/allow_detail.html', {'user':user}) 
-
 
 #승인
 def approve_user(request, id):
-    if request.method == 'POST':
-        selected_id= request.POST.getlist('selected_items')
-        users = User.objects.filter(id__in=selected_id)
-        for user in users:  # 각 사용자에 대해 반복
-            user.active_status = 1  
-            user.save()  # 변경 사항 저장
-            user.save()
-        return redirect('management:allow')
-    return render(request, 'management/allow.html') 
+    user = User.objects.get(id=id)
+    data = User.objects.filter(active_status = 0) 
+    user.active_status = 1  
+    user.save()  # 변경 사항 저장
+    return render(request, 'management/allow.html',{'data':data}) 
 
 
 #활동중인 인원 구분 및 보류 위한 페이지
@@ -72,40 +62,7 @@ def inactive(request):
 def detail(request, id):
     data = get_object_or_404(User, id=id)
     print(data.active_status)
-    return render(request, 'management/detail.html', {'data':data})   
-
-#퇴사자 페이지
-def retire(request):
-    data = User.objects.filter(Q(active_status = 3)) #여기서 사용하는 Q는 장고에서 쓰는 or
-    return render(request, 'management/retire.html', {'data':data})
-
-#퇴사자 상세 페이지
-def retire_detail(request, id):
-    data = get_object_or_404(User, id=id)
-    print(data.active_status)
-    return render(request, 'management/retire_detail.html', {'data':data})
-
-#휴직자 페이지
-def leave(request):
-    data = User.objects.filter(Q(active_status = 2)) #여기서 사용하는 Q는 장고에서 쓰는 or
-    return render(request, 'management/retire.html', {'data':data})
-
-#휴직자 상세페이지
-def leave_detail(request, id):
-    data = get_object_or_404(User, id=id)
-    print(data.active_status)
-    return render(request, 'management/retire_detail.html', {'data':data})
-
-#보류 페이지
-def reject(request):
-    data = User.objects.filter(Q(active_status = 4)) #여기서 사용하는 Q는 장고에서 쓰는 or
-    return render(request, 'management/reject.html', {'data':data})
-
-#보류자 상세페이지
-def reject_detail(request, id):
-    data = get_object_or_404(User, id=id)
-    print(data.active_status)
-    return render(request, 'management/retire_detail.html', {'data':data})
+    return render(request, 'management/detail.html', {'data':data}) 
 
 #검색 로직
 def search(request):
@@ -119,15 +76,59 @@ def search(request):
     print(query)
     print('='*30)
     return render(request, 'management/manager_dashboard.html', {'results': results, 'query': query})
-#일괄선택해서 데이터 처리하는 기능
-# def all(request):
-#     if request.method == 'POST':  # 요청 메서드가 POST인지 확인
-#         selected_items = request.POST.getlist('selected_items')  # POST 데이터에서 선택된 항목의 ID 리스트 가져오기
-#         print(selected_items)
-#         users = User.objects.filter(id__in=selected_items)
-#         for user in users:  # 각 사용자에 대해 반복
-#             user.active_status = 1  
-#             user.save()  # 변경 사항 저장
-#         return redirect('management:reject')  # 처리 완료 후 사용자 리스트 페이지로 리다이렉트
-#     return render(request, 'management/reject.html')  
+
+#비활성화 기능
+def disable(request, id):
+    user = get_object_or_404(User, id=id)
+    data = User.objects.all()
+    user.active_status = 0 
+    user.save() 
+    return render(request, 'management/detail.html', {'data':data}) 
+
+#활성화 기능
+def active(request, id):
+    user = get_object_or_404(User, id=id)
+    data = User.objects.all()
+    user.active_status = 1  
+    user.save() 
+    return render(request, 'management/detail.html', {'data':data}) 
+
+
+#휴직자 활성화기능
+def leave_active(request, id):
+    user = get_object_or_404(User, id=id)
+    data = User.objects.all()
+    user.active_status = 2  
+    user.save() 
+    return render(request, 'management/detail.html', {'data':data}) 
+
+#퇴사자 활성화기능
+def retire_active(request, id):
+    user = get_object_or_404(User, id=id)
+    data = User.objects.all()
+    user.active_status = 3  
+    user.save() 
+    return render(request, 'management/detail.html', {'data':data})
+
+# 보류자 활성화기능
+def reject_active(request, id):
+    user = get_object_or_404(User, id=id)
+    data = User.objects.all()
+    user.active_status = 4 
+    user.save()
+    return render(request, 'management/detail.html', {'data':data})
+
+def test(request):
+    data = User.objects.all()
+    return render(request, 'management/test.html',{'data':data})
+
+
+def search(request):
+    query = request.POST.get('seachText', '')
+    if query:
+        results = User.objects.filter(name__icontains=query)
+    else:
+        results = User.objects.all()
+    return render(request, 'management/test.html', {'data': results, 'query': query})
+
          

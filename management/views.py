@@ -129,6 +129,4 @@ def search(request):
         results = User.objects.filter(name__icontains=query)
     else:
         results = User.objects.all()
-    return render(request, 'management/test.html', {'data': results, 'query': query})
-
-         
+    return render(request, 'management/test.html', {'data': results, 'query': query})        

@@ -5,14 +5,15 @@ from django.urls import reverse
 from django.db.models import Q
 
 #관리자 메인페이지 DB에서 정보 받아오는 부분
-def manager_dashboard(request):
+def dashboard(request):
     data = User.objects.all()
     return render(request, 'management/dashboard.html',{'data':data})
 
-#상세페이지
-def manager_detail(request, id):
-    user = get_object_or_404(User, id=id)
-    return render(request, 'management/management_detail.html', {'user':user})
+#유저상세페이지
+def detail(request, id):
+    data = get_object_or_404(User, id=id)
+    return render(request, 'management/detail.html', {'data':data}) 
+
 
 #개인정보 수정
 def manager_edit(request, id):
@@ -38,6 +39,7 @@ def manager_edit(request, id):
         return redirect("management:management_detail", id)
 
 
+
 # 가입승인페이지
 def allow(request):
     data = User.objects.filter(active_status = 0)
@@ -53,29 +55,12 @@ def approve_user(request, id):
     return render(request, 'management/allow.html',{'data':data}) 
 
 
+
 #활동중인 인원 구분 및 보류 위한 페이지
 def inactive(request):
     data = User.objects.filter(~Q(active_status = 0)) #여기서 사용하는 Q는 장고에서 쓰는 or
     return render(request, 'management/inactive.html', {'data':data})
 
-#유저상세페이지
-def detail(request, id):
-    data = get_object_or_404(User, id=id)
-    print(data.active_status)
-    return render(request, 'management/detail.html', {'data':data}) 
-
-#검색 로직
-def search(request):
-    query = request.GET.get('query')
-    if query:
-        results = User.objects.filter(name__icontains=query)
-    else:
-        results = []
-    
-    print('='*30)
-    print(query)
-    print('='*30)
-    return render(request, 'management/manager_dashboard.html', {'results': results, 'query': query})
 
 #비활성화 기능
 def disable(request, id):
@@ -118,15 +103,17 @@ def reject_active(request, id):
     user.save()
     return render(request, 'management/detail.html', {'data':data})
 
+#테스트페이지
 def test(request):
     data = User.objects.all()
     return render(request, 'management/test.html',{'data':data})
 
-
+#검색로직
 def search(request):
     query = request.POST.get('seachText', '')
     if query:
         results = User.objects.filter(name__icontains=query)
     else:
-        results = User.objects.all()
-    return render(request, 'management/test.html', {'data': results, 'query': query})        
+        results = []
+    return render(request, 'management/manager_dashboard.html', {'results': results, 'query': query})
+         

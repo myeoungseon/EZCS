@@ -13,6 +13,8 @@ def list(request):
     print(data)
     return render(request, "counseling/index.html",{'data':data})
 
+
+
 def test(request):
     return render(request, "counseling/test.html")
 

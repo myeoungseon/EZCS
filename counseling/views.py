@@ -87,6 +87,8 @@ def stt_chat(request):
 
     if request.method == "POST":
         text = request.POST.get("text")
+        username = request.POST.get("username")
+        phone_number = request.POST.get("phone_number")
         print(text)
 
 

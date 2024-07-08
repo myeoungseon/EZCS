@@ -124,7 +124,7 @@ def allow_search(request):
         results = User.objects.filter(name__icontains=query)
     else:
         results = []
-    return render(request, 'management/manager_dashboard.html', {'data': results, 'query': query})
+    return render(request, 'management/manager_dashboard.html', {'': results, 'query': query})
          
 def inactive_search(request):
     query = request.POST.get('seachText', '')

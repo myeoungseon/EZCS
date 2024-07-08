@@ -117,7 +117,7 @@ def search(request):
     else:
         results = []
     return render(request, 'management/dashboard.html', {'data': results, 'query': query})
-         
+       
 def allow_search(request):
     query = request.POST.get('seachText', '')
    
@@ -135,4 +135,3 @@ def inactive_search(request):
     else:
         results = []
     return render(request, 'management/inactive.html', {'data': results, 'query': query})
-         

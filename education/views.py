@@ -164,7 +164,7 @@ def quiz_details(request, log_id):
     # return render(request, 'education/quiz_details.html', {'log': log, 'items': items})
     
     log = get_object_or_404(QuizHistroy, id=log_id)
-    items = QuizHistroyItem.objects.filter(education_quiz_histroy_id=log)
+    items = QuizHistroyItem.objects.filter(education_quiz_histroy_id=log_id).select_related('education_quiz_id')
     print('='*20)
     print(items)
     print('='*20)

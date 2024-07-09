@@ -66,7 +66,6 @@ def quiz(request):
                     'commentary': quiz.commentary,  # 해설 추가
                     'correct_answer': quiz.answer
                 }
-                print(results)
 
             is_passed = correct_answers >= 3  # 3개 이상의 정답이면 통과로 설정
             categories = [Quiz.objects.get(id=quiz_id).category for quiz_id in quiz_ids]  # 퀴즈 ID로 각 퀴즈의 카테고리 가져오기
@@ -82,6 +81,7 @@ def quiz(request):
 
             # 디버깅 정보 출력
             print(f'QuizHistroy saved: {history}')
+           
 
             # QuizHistroyItem 객체 생성 및 저장
             for idx, answer in enumerate(answers):
@@ -155,14 +155,6 @@ def quiz_history(request):
 # 퀴즈 이력 상세
 @login_required
 def quiz_details(request, log_id):
-
-    # 퀴즈 내역을 그대로 복원해서 html에 뿌려주세요 - ㅎㅅ
-    # quizhistory id == historyitems에 quiz_histo_id 에 quiz_id == quiz id 문제를 출력 해야 합니다. 
-    # 아래는 임시 
-    # log = get_object_or_404(QuizHistroy, id=log_id)
-    # items = QuizHistroyItem.objects.filter(quiz_history=log).select_related('quiz')
-    # return render(request, 'education/quiz_details.html', {'log': log, 'items': items})
-    
     log = get_object_or_404(QuizHistroy, id=log_id)
     items = QuizHistroyItem.objects.filter(education_quiz_histroy_id=log_id).select_related('education_quiz_id')
     print('='*20)

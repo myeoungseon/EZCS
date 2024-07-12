@@ -1,19 +1,41 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 기본 폰트 설정 */
 body {
     width: 100%;
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'GmarketSansMedium', Arial, sans-serif !important;
     margin: 0;
     padding: 0;
     background-color: #f5f7fb;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensures the body takes at least full viewport height */
+}
+.main-content {
+    /* margin-top: 80px;  */
+    padding: 20px;
+    margin-left: 40px;
+    flex-grow: 1; /* Ensures main content takes available space */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Adjusted to account for fixed header */
+}
+img.ezcs-logo {
+    width: 100px;
+    height: auto;
+    margin: 20px 20px 20px 0px;
 }
 
 .sidebar {
-    width: 180px;
+    width: 200px;
     background-color: #ffffff;
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     border-right: 1px solid #e0e0e0;
     display: flex;
     flex-direction: column;
@@ -86,6 +108,7 @@ body {
 
 .sidebar .menu .submenu a.active {
     color: #1c90f3;
+    font-weight: bold;
 }
 
 .has-submenu > a::after {
@@ -98,7 +121,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    min-height: 100vh;
     transition: margin-left 0.3s ease;
 }
 
@@ -124,6 +146,25 @@ body {
     padding: 0px 0px 0px 30px;
 }
 
+.admin-page {
+    background-color: #58b0e3;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.admin-page a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.admin-page:hover {
+    background-color: #0056b3;
+}
+
 .logout {
     cursor: pointer;
     background-color: #2ec4b6;
@@ -131,6 +172,7 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s;
+    margin-left: 10px;
 }
 
 .logout a {
@@ -143,30 +185,22 @@ body {
     background-color: #e71d36;
 }
 
-.main-content {
-    flex-grow: 1;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
+/* .main-content {
     margin-top: 20px;
     padding: 20px;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     margin-left: 40px;
-    overflow: hidden;
-}
+    flex-grow: 1;
+} */
 
 .footer {
     background-color: #ffffff;
     text-align: center;
-    margin-top: 20px;
     width: calc(100% - 40px);
-    bottom: 0;
     left: 0;
     padding: 10px;
     border-top: 1px solid #e0e0e0;
     margin-left: 20px;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevents footer from shrinking */
 }
 
 .footer-content {
@@ -202,6 +236,29 @@ body {
 
 .sidebar-toggle:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 1366px) {
+    .sidebar {
+        width: 160px;
+    }
+
+    .content {
+        margin-left: 180px;
+    }
+
+    .main-content {
+        margin-left: 20px;
+    }
+
+    .footer {
+        width: calc(100% - 20px);
+    }
+
+    .header-right {
+        flex-direction: column;
+        align-items: flex-end;
+    }
 }
 
 @media (max-width: 768px) {

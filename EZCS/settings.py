@@ -25,9 +25,10 @@ SECRET_KEY = "django-insecure-uqq*r93rmw$um61%h3xs*zt%^2cv%n84^-sx0k&dx1tt!@s4d*
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.125.209.92']
 
 # Application definition
 
@@ -88,22 +89,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'EZCS',
+        # 'NAME': 'ezcs',
         'USER': os.environ['MySQL_ID'],
         'PASSWORD': os.environ['MySQL_PW'],
         'HOST': 'localhost',
+        # 'HOST': 'database-1.cf6gigmokj2d.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ezcs',
-#         'USER': os.environ['MySQL_ID'],
-#         'PASSWORD': os.environ['MySQL_PW'],
-#         'HOST': 'database-2.cf6gigmokj2d.ap-northeast-2.rds.amazonaws.com',
-#         'PORT': '3306',
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -111,6 +104,10 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        'OPTIONS': {
+            'user_attributes': ('email', 'first_name', 'last_name'),
+            'max_similarity': 1.0,  # 사용자 속성과 비밀번호 간의 최대 유사도 (기본값은 0.7)
+        },
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -169,7 +166,8 @@ LOGGING = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS = ['https://e72e-59-26-32-139.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://5832-59-26-32-139.ngrok-free.app']
+# CSRF_TRUSTED_ORIGINS = ['http://13.125.209.92']
 
 CSRF_COOKIE_SECURE = True
 

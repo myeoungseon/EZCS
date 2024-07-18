@@ -41,6 +41,9 @@
     flex-grow: 1;
     max-height: 50vh;
     overflow: hidden;
+    height: 709px;
+    max-height: 100vh;
+    max-width: 621px;
 }
 
 .stt-content .stt,
@@ -49,6 +52,9 @@
     flex-direction: column;
     flex-grow: 1;
     overflow-y: auto;
+    font-size: smaller;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .button-container {
@@ -76,7 +82,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -86,6 +91,7 @@
     flex: 1;
     margin: 0 5px;
 }
+
 
 .mic-button:disabled {
     background-color: #cccccc;
@@ -158,7 +164,7 @@
     font-family: 'Chosunilbo_myungjo', serif;
     font-size: 14px;
     line-height: 1.5;
-    max-width: 80%;
+    max-width: 50%;
     word-break: break-word;
     text-align: left;
 }

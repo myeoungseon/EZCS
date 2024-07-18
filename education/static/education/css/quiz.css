@@ -1,9 +1,10 @@
 .dashboard {
-    /* background-color: #f9f9f9; */
+    background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
+    width: 100%;
 }
 
 h1 {
@@ -12,7 +13,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-.log-detail, .quiz-history {
+.log-detail,
+.quiz-history {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -46,7 +48,8 @@ h1 {
 }
 
 .quiz-container {
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -54,6 +57,7 @@ h1 {
     position: relative;
     min-height: 200px;
 }
+
 .question {
     margin-bottom: 20px;
 }
@@ -101,16 +105,19 @@ h1 {
     padding: 20px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    margin-bottom: 20px; /* 추가된 여백 */
+    margin-bottom: 20px;
+    /* 추가된 여백 */
 }
 
-.explanation-title, .correct-answer-title {
+.explanation-title,
+.correct-answer-title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.explanation-content, .correct-answer-content {
+.explanation-content,
+.correct-answer-content {
     font-size: 16px;
     line-height: 1.5;
 }
@@ -125,17 +132,18 @@ h1 {
     padding: 20px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    margin-bottom: 40px; /* 추가된 여백 */
+    margin-bottom: 40px;
+    /* 추가된 여백 */
 }
 
 .submit-container {
-    padding: 20px;
+    /* padding: 20px; */
     margin-left: auto;
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
 }
 
-.submit-button {
+.submit-button, .end-button {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #2ec4b6;
@@ -143,8 +151,23 @@ h1 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none; /* 밑줄 제거 */
 }
 
-.submit-button:hover {
+.end-button {
+    text-decoration: none;
+}
+
+.submit-button:hover, .end-button:hover{
     background-color: #007a63;
 }
+
+.notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    margin-top: 250px;
+  }

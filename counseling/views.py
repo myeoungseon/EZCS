@@ -12,19 +12,16 @@ import random
 from django.conf import settings
 from datetime import datetime, timedelta
 from abuse_filter import AbuseFilter
-<<<<<<< HEAD
-=======
 from prompt import Prompt
->>>>>>> a61a4bd282f4a21b0c61975cb5fa25e28bc4b057
+
 
 
 logger = logging.getLogger(__name__)
 abuse_filter = AbuseFilter()
-<<<<<<< HEAD
-=======
+
 
 prompt = Prompt()
->>>>>>> a61a4bd282f4a21b0c61975cb5fa25e28bc4b057
+
 
 trans_chat_bot = None
 recommend_chat_bot = None
@@ -44,30 +41,11 @@ def counsel(request):
             model_id="ft:gpt-3.5-turbo-0125:personal::9god26fK",
             behavior_policy=prompt.get_behavior_policy_for_trans(),
         )
-<<<<<<< HEAD
-        context = {
-            'logId': log.id
-            , 'customer': customer
-        }
-        trans_chat_bot = Chatbot_trans(
-            model_id='ft:gpt-3.5-turbo-0125:personal::9god26fK',
-            behavior_policy='방언을 표준어로 번역해주세요.'
-        )
-        
-        messages = "너는 친절하고 상냥하고 유능한 고객센터 상담원이야. \
-        고객의 질문에 대해 고객센터 매뉴얼을 참고해서 완벽한 답변 대본을 작성해줘.\
-        예시: 네, 고객님 해당 문의 내용은 월사용요금을 kt에서 신용카드사로 청구하면 고객이 신용카드사에 결제대금을 납부하는 제도입니다."
 
-        recommend_chat_bot = Chatbot(
-            behavior_policy=messages,
-            k = 1
-        )
-        
-=======
 
         recommend_chat_bot = Chatbot(behavior_policy=prompt.get_behavior_policy_for_recommend(), k=1)
 
->>>>>>> a61a4bd282f4a21b0c61975cb5fa25e28bc4b057
+
         return render(request, "counseling/index.html", context)
 
     customer = CustomerProfile.objects.order_by("?").first()

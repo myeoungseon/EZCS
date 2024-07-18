@@ -41,11 +41,8 @@ def chat_view(request):
             output = chatbot.chat(message)
 
             evaluation_chatbot = Chatbot(
-<<<<<<< HEAD
-                model_id="gpt-3.5-turbo",
-=======
+
                 model_id="gpt-4o",
->>>>>>> a61a4bd282f4a21b0c61975cb5fa25e28bc4b057
                 category=category,
                 THRESHOLD=2,
                 behavior_policy=prompt.get_messages_for_evaluation(output, message),

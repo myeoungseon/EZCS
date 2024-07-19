@@ -188,7 +188,7 @@ def edit(request, id, flag):
         auth_user.email = request.POST.get('emailLocal') + '@' + request.POST.get('emailDomain')
         user_profile.phone_number = request.POST.get('phone')
         user_profile.department = request.POST.get('department')
-        user_profile.birth_date = request.POST.get('birthdate')
+        user_profile.birth_date = request.POST.get('birth_date')
         user_profile.address_code = request.POST.get('addressCode')
         user_profile.address = request.POST.get('address')
         user_profile.address_detail = request.POST.get('addressDetail')

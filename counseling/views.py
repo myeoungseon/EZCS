@@ -114,6 +114,11 @@ def ai_model(request):
 
     return JsonResponse({"error": "Invalid request"}, status=400)
 
+def mask_name(full_name):
+    if len(full_name) > 1:
+        return full_name[:-1] + '*'
+    return full_name
+
 
 def history(request):
     """
@@ -160,7 +165,11 @@ def history(request):
     paginator = Paginator(data, 10)
     page = request.GET.get("page")
     data = paginator.get_page(page)
+    
+    for log in data:
+        log.masked_name = mask_name(log.customer.name)
 
+        
     context = {
         "data": data,
         "searchSelect": search_select,

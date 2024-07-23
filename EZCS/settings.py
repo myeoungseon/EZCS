@@ -88,12 +88,14 @@ WSGI_APPLICATION = "EZCS.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'EZCS',
-        # 'NAME': 'ezcs',
-        'USER': os.environ['MySQL_ID'],
-        'PASSWORD': os.environ['MySQL_PW'],
-        'HOST': 'localhost',
-        # 'HOST': 'database-1.cf6gigmokj2d.ap-northeast-2.rds.amazonaws.com',
+        # 'NAME': 'EZCS',
+        'NAME': 'ezcs',
+        # 'USER': os.environ['MySQL_ID'],
+        'USER': 'admin',
+        # 'PASSWORD': os.environ['MySQL_PW'],
+        'PASSWORD': 'aivle202405',
+        # 'HOST': 'localhost',
+        'HOST': 'ezcs-database.cf6gigmokj2d.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
     }
 }

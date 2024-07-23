@@ -135,6 +135,13 @@ def board_detail(request, id):
     board = get_object_or_404(Board, id=id)
     return render(request, 'management/board_detail.html', {'board': board})
 
+def board_edit(request, id):
+    board = get_object_or_404(Board, id=id)
+    print('='*30)
+    print(board)
+    print('='*30)
+    return render(request, 'management/board_detail.html', {'board': board})
+
 def detail(request, id, flag):
     """
     유저 상세 페이지

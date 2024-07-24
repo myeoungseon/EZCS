@@ -163,10 +163,6 @@ def board_list(request):
     
     for item in data:
         item.masked_name = mask_name(item.auth_user.first_name)
-        print('='*30)
-        print(item.masked_name)
-        # print(item.auth_user.first_name)
-        print('='*30)
         soup = BeautifulSoup(item.body, 'html.parser')
         text = soup.get_text()
         item.body = text
@@ -192,9 +188,6 @@ def board_detail(request, id):
 
 def board_edit(request, id):
     board = get_object_or_404(Board, id=id)
-    print('='*30)
-    print(board)
-    print('='*30)
     return render(request, 'management/board_detail.html', {'board': board})
 
 def detail(request, id, flag):

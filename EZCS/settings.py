@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-uqq*r93rmw$um61%h3xs*zt%^2cv%n84^-sx0k&dx1tt!@s4d*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '43.202.66.155', 'ezcstest.ddns.net']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '43.202.66.155', 'ezcs.ddns.net']
 
 # Application definition
 
@@ -86,12 +86,10 @@ WSGI_APPLICATION = "EZCS.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ezcs',
-        'USER': os.environ['MySQL_ID'],
-        #'USER': 'admin',
-        'PASSWORD': os.environ['MySQL_PW'],
-        # 'HOST': 'database-1.cf6gigmokj2d.ap-northeast-2.rds.amazonaws.com',
-        # 'HOST': '127.0.0.1',
+        'NAME': os.getenv('MySQL_DB', 'EZCS'),
+        'USER': os.getenv('MySQL_ID', 'root'),
+        'PASSWORD': os.getenv('MySQL_PW', 'root'),
+        'HOST': os.getenv('MySQL_HOST', 'localhost'),
         'PORT': '3306',
     }
 }
@@ -104,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
         'OPTIONS': {
             'user_attributes': ('email', 'first_name', 'last_name'),
-            'max_similarity': 1.0,  # 사용자 속성과 비밀번호 간의 최대 유사도 (기본값은 0.7)
+            'max_similarity': 1.0,
         },
     },
     {
@@ -164,7 +162,7 @@ LOGGING = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS = ['http://43.202.66.155', 'https://43.202.66.155', 'http://ezcstest.ddns.net', 'https://ezcstest.ddns.net']
+CSRF_TRUSTED_ORIGINS = ['http://43.202.66.155', 'https://43.202.66.155', 'http://ezcs.ddns.net', 'https://ezcs.ddns.net']
 
 CSRF_COOKIE_SECURE = True
 
